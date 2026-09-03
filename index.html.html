@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novo rodapé de email · Alfa Seguros</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --laranja:#E85D04;
+    --laranja-escuro:#C44D00;
+    --ink:#1A1A1A;
+    --corpo:#555555;
+    --suave:#F8F8F6;
+    --fundo:#EFEFED;
+    --linha:#E6E4E0;
+    --alerta:#FFF5EE;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:'Montserrat',Arial,sans-serif;
+    background:var(--fundo);
+    color:var(--corpo);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:24px 18px 64px}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 30px}
+  .topbar img{height:40px;display:block}
+  .uso{
+    font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--laranja);background:#fff;border:1px solid #f1cdb2;border-radius:20px;padding:5px 12px;
+  }
+
+  /* Hero */
+  .hero{margin:0 0 26px}
+  .hero h1{font-size:32px;line-height:1.15;font-weight:800;color:var(--ink);margin:0 0 10px;letter-spacing:-.5px}
+  .hero p{font-size:15px;line-height:1.6;color:var(--corpo);margin:0;max-width:58ch}
+
+  /* Mensagem do grupo */
+  .quote{
+    background:#fff;border:1px solid var(--linha);border-radius:14px;padding:22px 24px;margin-bottom:18px;
+  }
+  .quote .from{
+    font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:#9a9a9a;margin:0 0 12px;
+  }
+  .quote p{font-size:13.5px;line-height:1.62;color:var(--corpo);margin:0 0 10px}
+  .quote p:last-child{margin-bottom:0}
+  .quote strong{color:var(--ink)}
+
+  /* Alerta crítico */
+  .alerta{
+    background:var(--alerta);border-left:4px solid var(--laranja);border-radius:8px;
+    padding:16px 18px;margin-bottom:34px;
+  }
+  .alerta p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink)}
+  .alerta strong{color:var(--laranja-escuro)}
+
+  /* Passos */
+  .step{
+    background:#fff;border:1px solid var(--linha);border-radius:14px;
+    padding:26px;margin-bottom:18px;
+  }
+  .step-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .num{
+    flex:0 0 auto;width:36px;height:36px;border-radius:10px;
+    background:var(--laranja);color:#fff;font-weight:800;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step-title{font-size:17px;font-weight:800;color:var(--ink);margin:0;line-height:1.25}
+  .step p.desc{font-size:14px;line-height:1.6;color:var(--corpo);margin:0 0 16px}
+  .step p.desc strong{color:var(--ink)}
+  .shot{
+    width:100%;height:auto;display:block;border:1px solid var(--linha);
+    border-radius:10px;margin-top:6px;
+  }
+  .shot + .shot{margin-top:12px}
+
+  .step.acao{border-color:#f1cdb2;box-shadow:0 0 0 3px #fdf1e8}
+
+  /* Formulário */
+  .form-intro{font-size:13px;color:#8b8b8b;margin:2px 0 18px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .full{grid-column:1 / -1}
+  label{display:block;font-size:11px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+  label .opt{color:#aaa;font-weight:600}
+  label .req{color:var(--laranja)}
+  input,select{
+    width:100%;font-family:inherit;font-size:14px;color:var(--ink);
+    padding:12px 14px;border:1.5px solid var(--linha);border-radius:9px;background:#fff;transition:border-color .15s;
+  }
+  select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' fill='none' stroke='%23E85D04' stroke-width='1.6'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+  input:focus,select:focus{outline:none;border-color:var(--laranja)}
+  input::placeholder{color:#b7b7b7;font-weight:400}
+  .fieldnote{font-size:11.5px;line-height:1.5;color:#8b8b8b;margin:7px 0 0}
+  .fieldnote strong{color:var(--laranja-escuro)}
+
+  /* Preview + botão */
+  .preview-frame{border:1px solid var(--linha);border-radius:10px;background:#fff;padding:22px;overflow-x:auto;margin-top:22px}
+  .preview-frame::-webkit-scrollbar{height:7px}
+  .preview-frame::-webkit-scrollbar-thumb{background:#d8d5d0;border-radius:4px}
+  .preview-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--laranja);margin:0 0 10px}
+  .actions{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
+  .btn{
+    appearance:none;border:0;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.4px;
+    text-transform:uppercase;color:#fff;background:var(--laranja);padding:15px 30px;border-radius:9px;transition:background .15s,transform .05s;
+  }
+  .btn:hover{background:var(--laranja-escuro)}
+  .btn:active{transform:translateY(1px)}
+  .btn.ok{background:#1f8f4e}
+  .status{font-size:12.5px;color:#8b8b8b}
+  .status strong{color:#1f8f4e}
+  .status.warn strong{color:var(--laranja)}
+
+  .desk{background:var(--suave);border-left:4px solid var(--laranja);border-radius:8px;padding:14px 16px;margin-top:18px;font-size:13px;line-height:1.55;color:var(--corpo)}
+  .desk strong{color:var(--ink)}
+
+  .fecho{text-align:center;margin-top:30px}
+  .fecho p{font-size:13px;color:#8b8b8b;margin:0}
+  .fecho .ass{color:var(--laranja);font-weight:700}
+
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr}
+    .hero h1{font-size:26px}
+    .step,.quote{padding:20px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <img src="https://alfaseguros.pt/wp-content/uploads/2022/01/logo_alfa_.svg" alt="Alfa Seguros">
+    <span class="uso">Comunicação interna</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Bom diaaaa, equipa Alfa 👋</h1>
+    <p>Vamos fazer uma pequena alteração ao nosso rodapé de email. Prometemos que demora pouco: é seguir isto passo a passo, do início ao fim, e não tem como falhar.</p>
+  </div>
+
+  <!-- MENSAGEM DO GRUPO -->
+  <div class="quote">
+    <p class="from">📩 A mensagem que ficou no grupo ontem</p>
+    <p><strong>Alteração dos rodapés de email.</strong> Vamos alterar os nossos rodapés e, para garantir que nada falha, hoje bem cedo recebem este email com todas as instruções para fazerem a alteração.</p>
+    <p>Por questões técnicas, vamos deixar de utilizar o sistema atual, em que o rodapé fica "invisível" para nós mas segue nos emails enviados. Voltamos ao método anterior: <strong>cada pessoa terá o seu rodapé configurado diretamente na sua conta de email.</strong></p>
+    <p>Hoje posso não estar a trabalhar, mas fico com o telemóvel e, assim que conseguir, respondo. O <strong>Nuno Pardal</strong> está disponível para ajudar caso exista alguma dificuldade.</p>
+    <p>Só peço uma coisa: sigam primeiro, passo a passo, tudo o que está aqui explicado. Não liguem ao Nuno antes de tentarem fazer exatamente o que está indicado. A ideia é que seja simples e rápido para todos. Obrigada a todos! 😊</p>
+  </div>
+
+  <!-- ALERTA CRÍTICO -->
+  <div class="alerta">
+    <p>⚠️ <strong>Muito importante:</strong> assim que começarem a trabalhar, não enviem qualquer email para clientes antes de configurarem o novo rodapé.</p>
+  </div>
+
+  <!-- PARTE 1 -->
+  <div class="step">
+    <div class="step-head"><span class="num">1</span><h2 class="step-title">Entrar no Gmail</h2></div>
+    <p class="desc">Abre o teu Gmail, como fazes todos os dias.</p>
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115639.png" alt="Ecrã inicial do Gmail">
+  </div>
+
+  <!-- PARTE 2 -->
+  <div class="step">
+    <div class="step-head"><span class="num">2</span><h2 class="step-title">Abrir as Definições</h2></div>
+    <p class="desc">No canto superior direito, clica no ícone da roda dentada.</p>
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115646.png" alt="Ícone de definições no canto superior direito">
+  </div>
+
+  <!-- PARTE 3 -->
+  <div class="step">
+    <div class="step-head"><span class="num">3</span><h2 class="step-title">Ver todas as definições</h2></div>
+    <p class="desc">No menu que abre, clica em <strong>Ver todas as definições</strong>.</p>
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115655.png" alt="Botão Ver todas as definições">
+  </div>
+
+  <!-- PARTE 4 -->
+  <div class="step">
+    <div class="step-head"><span class="num">4</span><h2 class="step-title">Descer no separador Geral</h2></div>
+    <p class="desc">Entras num painel com várias informações. Fica no separador <strong>Geral</strong> e desce mais para baixo na página.</p>
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115711.png" alt="Painel de definições do Gmail">
+  </div>
+
+  <!-- PARTE 5 -->
+  <div class="step">
+    <div class="step-head"><span class="num">5</span><h2 class="step-title">Encontrar a Assinatura</h2></div>
+    <p class="desc">Vais encontrar uma secção chamada <strong>Assinatura</strong>, com a que tens neste momento. É aqui que vamos fazer a alteração. Clica em <strong>Criar nova</strong> e dá-lhe o nome <strong>Nome - Rodapé novo</strong>.</p>
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115733.png" alt="Secção Assinatura nas definições do Gmail">
+  </div>
+
+  <!-- PARTE 6 ( AÇÃO) -->
+  <div class="step acao">
+    <div class="step-head"><span class="num">6</span><h2 class="step-title">Preencher e copiar a tua assinatura</h2></div>
+    <p class="desc">Preenche os teus dados. A pré-visualização atualiza enquanto escreves. Depois carrega em <strong>Copiar assinatura</strong>.</p>
+
+    <p class="form-intro">Só o nome e o email são obrigatórios. O resto ajusta consoante o teu caso.</p>
+    <div class="grid">
+      <div>
+        <label for="nome">Nome <span class="req">(obrigatório)</span></label>
+        <input id="nome" type="text" placeholder="Ex.: Ana Martins" autocomplete="name">
+      </div>
+      <div>
+        <label for="email">Email <span class="req">(obrigatório)</span></label>
+        <input id="email" type="email" placeholder="ana.martins@alfaseguros.pt" autocomplete="email">
+      </div>
+      <div>
+        <label for="cargo">Função ou departamento <span class="opt">(opcional)</span></label>
+        <select id="cargo">
+          <option value="">Seleciona uma opção</option>
+          <optgroup label="Departamentos">
+            <option>Departamento 360</option>
+            <option>Departamento de Vida</option>
+            <option>Departamento Corporate</option>
+            <option>Departamento de Marketing</option>
+            <option>Departamento de Sinistros</option>
+            <option>Departamento de Contratação</option>
+            <option>Departamento de Parcerias</option>
+          </optgroup>
+          <optgroup label="Funções">
+            <option>CEO</option>
+            <option>Coordenador Departamento 360</option>
+            <option>Coordenador Departamento Vida</option>
+            <option>Coordenador Departamento Corporate</option>
+          </optgroup>
+        </select>
+      </div>
+      <div>
+        <label for="tel">Telefone <span class="opt">(opcional)</span></label>
+        <input id="tel" type="text" inputmode="numeric" value="+351 215 832 338">
+        <p class="fieldnote">Quem é do <strong>Departamento de Vida</strong> coloca o número Vodafone. Os restantes colocam o telefone empresarial.</p>
+      </div>
+    </div>
+
+    <div class="preview-frame">
+      <p class="preview-label">Pré-visualização</p>
+      <div id="sig-main">
+        <table cellpadding="0" cellspacing="0" border="0" width="600" style="border-collapse:collapse;max-width:600px;font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;">
+          <tr><td style="padding-bottom:12px;">
+            <table cellpadding="0" cellspacing="0" border="0"><tr>
+              <td style="vertical-align:middle;">
+                <table cellpadding="0" cellspacing="0" border="0">
+                  <tr><td class="f-nome" style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:16px;font-weight:normal;color:#1a1a1a;line-height:1.1;padding-bottom:2px;">O teu nome</td></tr>
+                  <tr><td class="f-cargo" style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:10px;font-weight:bold;letter-spacing:1.4px;text-transform:uppercase;color:#E8711F;padding-bottom:9px;"></td></tr>
+                  <tr><td style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:11px;color:#444444;padding-bottom:5px;">
+                    <img src="https://img.icons8.com/ios-filled/50/E8711F/phone.png" alt="" width="12" height="12" style="border:0;vertical-align:middle;">&nbsp; <span class="f-tel">+351 215 832 338</span>
+                    <span style="color:#cccccc;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <img src="https://img.icons8.com/ios-filled/50/E8711F/email.png" alt="" width="12" height="12" style="border:0;vertical-align:middle;">&nbsp; <a class="f-email-link" href="mailto:nome@alfaseguros.pt" style="color:#1a55c4;text-decoration:none;">nome@alfaseguros.pt</a>
+                  </td></tr>
+                  <tr><td style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:11px;color:#444444;">
+                    <img src="https://img.icons8.com/ios-filled/50/E8711F/marker.png" alt="" width="12" height="12" style="border:0;vertical-align:middle;">&nbsp; Av. Professor Dr. Augusto Abreu Lopes 43-C, 2675-301 Odivelas
+                  </td></tr>
+                </table>
+              </td>
+              <td style="width:28px;">&nbsp;</td>
+              <td style="vertical-align:middle;padding-top:18px;">
+                <table cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#E8711F;width:2px;height:56px;font-size:0;line-height:0;">&nbsp;</td></tr></table>
+              </td>
+              <td style="width:12px;">&nbsp;</td>
+              <td style="vertical-align:bottom;text-align:left;padding-bottom:1px;">
+                <img src="https://alfaseguros.pt/wp-content/uploads/2022/01/logo-alfa-seguros-sombra.png" alt="Alfa Seguros" height="48" style="border:0;height:48px;display:inline-block;">
+              </td>
+            </tr></table>
+          </td></tr>
+
+          <tr><td style="padding-bottom:12px;">
+            <table cellpadding="0" cellspacing="0" border="0"><tr>
+              <td style="vertical-align:middle;"><a href="https://www.facebook.com/AlfaSegurosPT/"><img src="https://img.icons8.com/color/48/facebook-new.png" alt="Facebook" width="18" height="18" style="border:0;display:block;"></a></td>
+              <td style="width:6px;">&nbsp;</td>
+              <td style="vertical-align:middle;"><a href="https://www.linkedin.com/company/alfa-seguros"><img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn" width="18" height="18" style="border:0;display:block;"></a></td>
+              <td style="width:6px;">&nbsp;</td>
+              <td style="vertical-align:middle;"><a href="https://www.instagram.com/alfasegurospt/"><img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" width="18" height="18" style="border:0;display:block;"></a></td>
+              <td style="width:12px;">&nbsp;</td>
+              <td style="vertical-align:middle;"><a href="https://scoring.pt/empresas-certificadas/alfaseguros"><img src="https://alfaseguros.pt/wp-content/uploads/2026/03/alfaseguros-scoring-2025-scaled.webp" alt="Scoring TOP 10 e TOP 5% 2025" height="26" style="border:0;display:block;height:26px;"></a></td>
+            </tr></table>
+          </td></tr>
+
+          <tr><td style="padding-bottom:12px;">
+            <a href="https://alfaseguros.pt/seguros-online/"><img src="https://alfaseguros.pt/wp-content/uploads/2026/08/capa-rodape-seguros-online-alfa-seguros-simular-agora.webp" alt="Alfa Seguros - Seguros Online" width="600" style="display:block;border:0;width:600px;max-width:100%;height:auto;border-radius:6px;"></a>
+          </td></tr>
+
+          <tr><td style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:8px;color:#9a9a9a;line-height:1.45;padding-bottom:7px;">
+            <strong style="color:#DB5A20;">NOTA INFORMATIVA:</strong> A informação apresentada é meramente indicativa, estando sujeita à aprovação da companhia de seguros, uma vez que é esta que irá considerar todas as eventualidades suscetíveis de variarem. A simulação apresentada não deve ser tida como único elemento para a decisão das partes.
+          </td></tr>
+          <tr><td style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:8px;color:#DB5A20;font-weight:bold;line-height:1.45;padding-bottom:7px;">
+            Consulte <a href="https://alfaseguros.pt/informacoes-legais-alfa-seguros/" style="color:#DB5A20;text-decoration:underline;font-weight:bold;">aqui</a> todas as informações legais e deveres de informação da Alfa Seguros.
+          </td></tr>
+          <tr><td style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:8px;color:#9a9a9a;line-height:1.45;">
+            <strong>CONFIDENCIAL E PROTEGIDO POR SIGILO PROFISSIONAL.</strong> Esta mensagem vai endereçada exclusivamente ao seu destinatário e contém informação confidencial sujeita a segredo profissional cuja divulgação não é permitida por lei. No caso de ter recebido esta mensagem por engano, pedimos-lhe que a elimine, assim como qualquer documento anexo à mesma, e que nos informe imediatamente dessa ocorrência via correio eletrónico ou telefonema. Assim sendo, fica desde já notificado de que a distribuição, cópia ou utilização desta mensagem, ou de qualquer documento anexo à mesma, qualquer que seja a sua finalidade, é estritamente proibida por lei.
+          </td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="copiar(this)">Copiar assinatura</button>
+      <span class="status" id="status-main"></span>
+    </div>
+  </div>
+
+  <!-- PARTE 7 -->
+  <div class="step">
+    <div class="step-head"><span class="num">7</span><h2 class="step-title">Colar dentro da caixa</h2></div>
+    <p class="desc">Clica dentro da caixa da nova assinatura e cola com <strong>Ctrl+V</strong> (ou Cmd+V no Mac). Depois de colares, vai ficar assim:</p>
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115743.png" alt="Assinatura já colada na caixa do Gmail">
+  </div>
+
+  <!-- PARTE 8 -->
+  <div class="step">
+    <div class="step-head"><span class="num">8</span><h2 class="step-title">Definir como assinatura predefinida</h2></div>
+    <p class="desc">Agora diz ao Gmail para usar esta assinatura. Em cada um dos campos, escolhe o teu <strong>Nome - Rodapé novo</strong>, como no exemplo.</p>
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115752.png" alt="Escolher a assinatura predefinida para emails novos">
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115755.png" alt="Escolher a assinatura para respostas e reencaminhamentos">
+  </div>
+
+  <!-- PARTE 9 -->
+  <div class="step">
+    <div class="step-head"><span class="num">9</span><h2 class="step-title">Guardar alterações</h2></div>
+    <p class="desc">Desce até ao fundo da página e clica em <strong>Guardar alterações</strong>. Sem este passo, nada fica guardado.</p>
+    <img class="shot" src="https://alfaseguros.pt/wp-content/uploads/2026/09/Captura-de-ecra-2026-09-03-115804.png" alt="Botão Guardar alterações no fundo da página">
+  </div>
+
+  <!-- PARTE 10 -->
+  <div class="step">
+    <div class="step-head"><span class="num">10</span><h2 class="step-title">Fazer um teste</h2></div>
+    <p class="desc">Enviem um email de teste entre vocês para confirmar que está tudo bem: nome, contactos, logótipo e imagens a aparecer como deve ser.</p>
+    <div class="desk"><strong>Quem trabalha com o Desk:</strong> depois da alteração, confirmem se a assinatura aparece duplicada. Se duplicar, apaguem a assinatura que têm atualmente configurada no Desk.</div>
+  </div>
+
+  <div class="fecho">
+    <p>Qualquer dúvida, falem com o <span class="ass">Nuno Pardal</span>.</p>
+  </div>
+
+</div>
+
+<script>
+  var nome  = document.getElementById('nome');
+  var cargo = document.getElementById('cargo');
+  var email = document.getElementById('email');
+  var tel   = document.getElementById('tel');
+
+  function formatTel(v){
+    var d = v.replace(/\D/g,'');
+    if(d.indexOf('351') === 0){ d = d.slice(3); }
+    d = d.slice(0,9);
+    if(!d.length){ return ''; }
+    var parts = [];
+    for(var i=0;i<d.length;i+=3){ parts.push(d.slice(i,i+3)); }
+    return '+351 ' + parts.join(' ');
+  }
+
+  function render(){
+    var vNome  = nome.value.trim()  || 'O teu nome';
+    var vEmail = email.value.trim() || 'nome@alfaseguros.pt';
+    var vCargo = cargo.value.trim();
+    var vTel   = tel.value.trim()   || '+351 215 832 338';
+
+    document.querySelectorAll('.f-nome').forEach(function(el){ el.textContent = vNome; });
+    document.querySelectorAll('.f-cargo').forEach(function(el){ el.textContent = vCargo; });
+    document.querySelectorAll('.f-tel').forEach(function(el){ el.textContent = vTel; });
+    document.querySelectorAll('.f-email-link').forEach(function(el){
+      el.textContent = vEmail;
+      el.setAttribute('href', 'mailto:' + vEmail);
+    });
+  }
+
+  nome.addEventListener('input', render);
+  cargo.addEventListener('change', render);
+  email.addEventListener('input', render);
+  tel.addEventListener('input', function(){
+    var pos = tel.value.length;
+    tel.value = formatTel(tel.value);
+    render();
+  });
+  render();
+
+  function feedback(msg, warn){
+    var s = document.getElementById('status-main');
+    s.className = 'status' + (warn ? ' warn' : '');
+    s.innerHTML = msg;
+  }
+  function marcarBotao(btn){
+    var original = btn.textContent;
+    btn.textContent = 'Copiado ✓';
+    btn.classList.add('ok');
+    setTimeout(function(){ btn.textContent = original; btn.classList.remove('ok'); }, 2200);
+  }
+
+  async function copiar(btn){
+    if(!nome.value.trim() || !email.value.trim()){
+      feedback('<strong>Falta o teu nome e email.</strong> Preenche em cima primeiro.', true);
+      return;
+    }
+    var alvo = document.getElementById('sig-main');
+    var html = alvo.innerHTML;
+    var texto = alvo.innerText;
+    try {
+      var item = new ClipboardItem({
+        'text/html': new Blob([html], {type:'text/html'}),
+        'text/plain': new Blob([texto], {type:'text/plain'})
+      });
+      await navigator.clipboard.write([item]);
+      marcarBotao(btn);
+      feedback('Copiado. Agora cola no Gmail (Ctrl+V).', false);
+    } catch (e) {
+      try {
+        var range = document.createRange();
+        range.selectNode(alvo);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand('copy');
+        sel.removeAllRanges();
+        marcarBotao(btn);
+        feedback('Copiado. Agora cola no Gmail (Ctrl+V).', false);
+      } catch (e2) {
+        feedback('<strong>Não deu para copiar automaticamente.</strong> Seleciona a assinatura e usa Ctrl+C.', true);
+      }
+    }
+  }
+</script>
+</body>
+</html>
