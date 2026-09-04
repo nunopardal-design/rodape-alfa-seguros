@@ -233,19 +233,10 @@
         </select>
         <p class="fieldnote">Escolhe <strong>um departamento</strong> ou <strong>uma função</strong>, não os dois.</p>
       </div>
-      <div id="tel-simples-wrap">
+      <div>
         <label for="tel">Telefone <span class="opt">(opcional)</span></label>
         <input id="tel" type="text" inputmode="numeric" value="+351 215 832 338">
-        <p class="fieldnote">Coloca o teu telefone empresarial.</p>
-      </div>
-      <div id="tel-ring-wrap" style="display:none;">
-        <label for="tel-ring">Número Ringover <span class="opt">(opcional)</span></label>
-        <input id="tel-ring" type="text" inputmode="numeric" placeholder="+351 210 270 868">
-      </div>
-      <div id="tel-movel-wrap" style="display:none;">
-        <label for="tel-movel">Número de telemóvel <span class="opt">(opcional)</span></label>
-        <input id="tel-movel" type="text" inputmode="numeric" placeholder="+351 910 177 587">
-        <p class="fieldnote">O ícone de WhatsApp na assinatura fica ligado a este número.</p>
+        <p class="fieldnote">Quem é do <strong>Departamento de Vida</strong> coloca o número Vodafone. Os restantes colocam o telefone empresarial.</p>
       </div>
     </div>
 
@@ -260,8 +251,7 @@
                   <tr><td class="f-nome" style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:16px;font-weight:normal;color:#1a1a1a;line-height:1.1;padding-bottom:2px;">O teu nome</td></tr>
                   <tr><td class="f-cargo" style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:10px;font-weight:bold;letter-spacing:1.4px;text-transform:uppercase;color:#E8711F;padding-bottom:9px;"></td></tr>
                   <tr><td id="f-contact-line" style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:11px;color:#444444;padding-bottom:5px;"></td></tr>
-                  <tr id="f-whatsapp-row" style="display:none;"><td id="f-whatsapp-cell" style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:11px;color:#444444;padding-bottom:5px;"></td></tr>
-                  <tr id="f-address-row"><td style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:11px;color:#444444;">
+                  <tr><td style="font-family:'MADE Tommy Soft',Arial,Helvetica,sans-serif;font-size:11px;color:#444444;">
                     <img src="https://img.icons8.com/ios-filled/50/E8711F/marker.png" alt="" width="12" height="12" style="border:0;vertical-align:middle;">&nbsp; Av. Professor Dr. Augusto Abreu Lopes 43-C, 2675-301 Odivelas
                   </td></tr>
                 </table>
@@ -360,15 +350,7 @@
   var funcao = document.getElementById('funcao');
   var email = document.getElementById('email');
   var tel   = document.getElementById('tel');
-  var telRing = document.getElementById('tel-ring');
-  var telMovel = document.getElementById('tel-movel');
-  var telSimplesWrap = document.getElementById('tel-simples-wrap');
-  var telRingWrap = document.getElementById('tel-ring-wrap');
-  var telMovelWrap = document.getElementById('tel-movel-wrap');
   var contactLine = document.getElementById('f-contact-line');
-  var whatsappRow = document.getElementById('f-whatsapp-row');
-  var whatsappCell = document.getElementById('f-whatsapp-cell');
-  var addressRow = document.getElementById('f-address-row');
   var bannerImg = document.getElementById('banner-img');
 
   var BANNER_PARTICULARES = 'https://alfaseguros.pt/wp-content/uploads/2026/09/rodape-email-alfa-seguros-2026-novo-set-particulares.png';
@@ -376,11 +358,8 @@
 
   var IC_PHONE = 'https://img.icons8.com/ios-filled/50/E8711F/phone.png';
   var IC_EMAIL = 'https://img.icons8.com/ios-filled/50/E8711F/email.png';
-  var IC_MARKER = 'https://img.icons8.com/ios-filled/50/E8711F/marker.png';
-  var IC_WA = 'https://img.icons8.com/color/48/whatsapp.png';
-  var ADDRESS_HTML = '<img src="' + IC_MARKER + '" alt="" width="12" height="12" style="border:0;vertical-align:middle;">&nbsp; Av. Professor Dr. Augusto Abreu Lopes 43-C, 2675-301 Odivelas';
 
-  // Agrupa de 3 em 3 com prefixo +351 (telefone simples)
+  // Agrupa de 3 em 3 com prefixo +351
   function formatTel(v){
     var d = v.replace(/\D/g,'');
     if(d.indexOf('351') === 0){ d = d.slice(3); }
@@ -390,44 +369,15 @@
     for(var i=0;i<d.length;i+=3){ parts.push(d.slice(i,i+3)); }
     return '+351 ' + parts.join(' ');
   }
-  // Agrupa de 3 em 3 sem prefixo (números do Vida)
-  function format9(v){
-    var d = v.replace(/\D/g,'');
-    if(d.indexOf('351') === 0){ d = d.slice(3); }
-    d = d.slice(0,9);
-    if(!d.length){ return ''; }
-    var parts = [];
-    for(var i=0;i<d.length;i+=3){ parts.push(d.slice(i,i+3)); }
-    return parts.join(' ');
-  }
 
   var SEP = '<span style="color:#cccccc;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>';
-  var SEP_MINI = '<span style="color:#cccccc;">&nbsp;|&nbsp;</span>';
 
   function imgIcon(src){
     return '<img src="' + src + '" alt="" width="12" height="12" style="border:0;vertical-align:middle;">';
   }
 
-  function construirContactos(vEmail, isVida){
+  function construirContactos(vEmail){
     var emailPart = imgIcon(IC_EMAIL) + '&nbsp; <a href="mailto:' + vEmail + '" style="color:#1a55c4;text-decoration:none;">' + vEmail + '</a>';
-
-    if(isVida){
-      var ring  = telRing.value.trim();
-      var movel = telMovel.value.trim();
-      var parts = [];
-      if(ring){ parts.push(imgIcon(IC_PHONE) + '&nbsp; ' + ring); }
-      if(movel){
-        var dig = movel.replace(/\D/g,'').slice(-9);
-        if(dig.charAt(0) === '9'){
-          parts.push('<a href="https://wa.me/351' + dig + '" target="_blank" style="text-decoration:none;color:#25D366;font-weight:bold;"><img src="' + IC_WA + '" alt="WhatsApp" width="13" height="13" style="border:0;vertical-align:middle;">&nbsp; ' + movel + '</a>');
-        } else {
-          parts.push(imgIcon(IC_PHONE) + '&nbsp; ' + movel);
-        }
-      }
-      if(!parts.length){ return emailPart; }
-      return parts.join(SEP_MINI) + SEP + emailPart;
-    }
-
     var t = tel.value.trim() || '+351 215 832 338';
     return imgIcon(IC_PHONE) + '&nbsp; ' + t + SEP + emailPart;
   }
@@ -437,22 +387,10 @@
     var vEmail = email.value.trim() || 'nome@alfaseguros.pt';
     var vCargo = departamento.value.trim() || funcao.value.trim();
 
-    var isVida = (departamento.value === 'Departamento de Vida' || funcao.value === 'Coordenador Departamento Vida');
-
-    // Mostra os campos certos consoante o Vida
-    telSimplesWrap.style.display = isVida ? 'none' : '';
-    telRingWrap.style.display    = isVida ? '' : 'none';
-    telMovelWrap.style.display   = isVida ? '' : 'none';
-
     document.querySelectorAll('.f-nome').forEach(function(el){ el.textContent = vNome; });
     document.querySelectorAll('.f-cargo').forEach(function(el){ el.textContent = vCargo; });
 
-    contactLine.innerHTML = construirContactos(vEmail, isVida);
-
-    // O WhatsApp passou para a linha 1, no próprio número de telemóvel.
-    // A linha separada deixa de ser usada.
-    whatsappRow.style.display = 'none';
-    whatsappCell.innerHTML = '';
+    contactLine.innerHTML = construirContactos(vEmail);
 
     var ehCorporate = (vCargo === 'Departamento Corporate' || vCargo === 'Coordenador Departamento Corporate');
     if(bannerImg){ bannerImg.setAttribute('src', ehCorporate ? BANNER_CORPORATE : BANNER_PARTICULARES); }
@@ -469,8 +407,6 @@
     render();
   });
   tel.addEventListener('input', function(){ tel.value = formatTel(tel.value); render(); });
-  telRing.addEventListener('input', function(){ telRing.value = formatTel(telRing.value); render(); });
-  telMovel.addEventListener('input', function(){ telMovel.value = formatTel(telMovel.value); render(); });
   render();
 
   function feedback(msg, warn){
